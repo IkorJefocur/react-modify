@@ -1,0 +1,26 @@
+{
+
+	"extends": ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["@typescript-eslint"],
+
+	"rules": {
+		"indent": "off",
+		"linebreak-style": ["error", "unix"],
+		"semi": "off",
+		"no-undef": "off",
+		"no-unused-vars": "off",
+		"max-len": ["error", {
+			"code": 80,
+			"comments": 100,
+			"tabWidth": 3
+		}],
+		"@typescript-eslint/indent": ["error", "tab", {
+			"SwitchCase": 0
+		}],
+		"@typescript-eslint/semi": ["error", "always"],
+		"@typescript-eslint/no-unused-vars": "off",
+		"@typescript-eslint/no-empty-function": "off"
+	}
+
+}
