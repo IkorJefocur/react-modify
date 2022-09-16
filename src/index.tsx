@@ -48,6 +48,7 @@ export function withMods<Props>(
 			</Fragment>}
 			{modChain.map((Mod, index) => index in allProps && (
 				<Context.Provider
+					key={index}
 					value={propSetters[index] as PropSetter<unknown>}
 				>
 					<Mod {...allProps[index]} />

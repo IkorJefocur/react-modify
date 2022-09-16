@@ -1,6 +1,6 @@
 {
   "name": "react-modify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Library for creating components with modifiers - another components that are changes props of target without wrapping them and causing re-renders on structure change",
   "main": "dist/index.js",
   "scripts": {
