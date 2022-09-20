@@ -5,9 +5,13 @@ import React, {
 } from 'react';
 import isEqual from 'react-fast-compare';
 
-export type ModProps<Props> = Props & {
+export type ModProps<Props> = Omit<Props, 'structure'> & {
 	structure: Structure;
 };
+
+export interface Modifiable {
+	structure: never;
+}
 
 type Structure = (base: ReactNode) => ReactNode;
 
@@ -26,7 +30,7 @@ export function Mod<Props>(props: ModProps<Props>) {
 	return null;
 }
 
-export function withMods<Props>(
+export function withMods<Props extends Modifiable>(
 	Base: ComponentType<Props>,
 	...modChain: ComponentType<ModProps<Props>>[]
 ) {
@@ -40,11 +44,11 @@ export function withMods<Props>(
 		, []);
 
 		const allProps = [{...props, structure: emptyStructure}, ...modProps];
-		const resultProps = allProps[modChain.length];
+		const {structure, ...resultProps} = allProps[modChain.length] || {};
 
 		return (<>
-			{resultProps && <Fragment key="base">
-				{resultProps.structure(<Base {...resultProps} />)}
+			{structure && <Fragment key="base">
+				{structure(<Base {...resultProps as Props} />)}
 			</Fragment>}
 			{modChain.map((Mod, index) => index in allProps && (
 				<Context.Provider
